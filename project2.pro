@@ -57,3 +57,8 @@ HEADERS += \
 FORMS += \
         mainwindow.ui \
     shoppingcart.ui
+
+DISTFILES += \
+    Project 2 Description.docx \
+    Bundles.csv \
+    Pets.csv
