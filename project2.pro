@@ -25,10 +25,35 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += \
         main.cpp \
-        mainwindow.cpp
+        mainwindow.cpp \
+    shoppingcart.cpp
 
 HEADERS += \
-        mainwindow.h
+        mainwindow.h \
+    shoppingcart.h \
+    BinarySearch.h \
+    Bird.h \
+    BubbleSort.h \
+    BubbleSortDecreasing.h \
+    BubbleSortIncreasing.h \
+    Cat.h \
+    Dog.h \
+    Fish.h \
+    Pet.h \
+    PetDatabase.h \
+    PetDatabaseSearchable.h \
+    PetDatabaseSearchableByName.h \
+    PetDatabaseSearchableByPrice.h \
+    PetDatabaseSearchableByType.h \
+    PetDatabaseSearchableByWeight.h \
+    PetDatabaseSortable.h \
+    PetDatabaseSortableByName.h \
+    PetDatabaseSortableByPrice.h \
+    PetDatabaseSortableByType.h \
+    PetDatabaseSortableByWeight.h \
+    SearchableVector.h \
+    SortableVector.h
 
 FORMS += \
-        mainwindow.ui
+        mainwindow.ui \
+    shoppingcart.ui
