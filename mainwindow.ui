@@ -17,8 +17,8 @@
    <widget class="QPushButton" name="loadButton">
     <property name="geometry">
      <rect>
-      <x>60</x>
-      <y>400</y>
+      <x>110</x>
+      <y>360</y>
       <width>80</width>
       <height>22</height>
      </rect>
@@ -30,8 +30,8 @@
    <widget class="QPushButton" name="addCartButton">
     <property name="geometry">
      <rect>
-      <x>230</x>
-      <y>400</y>
+      <x>320</x>
+      <y>360</y>
       <width>80</width>
       <height>22</height>
      </rect>
@@ -43,8 +43,8 @@
    <widget class="QPushButton" name="showButton">
     <property name="geometry">
      <rect>
-      <x>410</x>
-      <y>390</y>
+      <x>510</x>
+      <y>360</y>
       <width>80</width>
       <height>22</height>
      </rect>
@@ -58,7 +58,7 @@
      <rect>
       <x>140</x>
       <y>10</y>
-      <width>411</width>
+      <width>431</width>
       <height>191</height>
      </rect>
     </property>
@@ -86,9 +86,9 @@
    <widget class="QTableWidget" name="tableWidget_2">
     <property name="geometry">
      <rect>
-      <x>140</x>
+      <x>200</x>
       <y>220</y>
-      <width>411</width>
+      <width>311</width>
       <height>101</height>
      </rect>
     </property>

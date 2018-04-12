@@ -54,7 +54,6 @@ void MainWindow::on_loadButton_clicked()
     // enable other buttons
     ui->addCartButton->setEnabled(true);
     ui->showButton->setEnabled(true);
-
     // open file and read
     std::ifstream file("Pets.csv");
     if (file.is_open()){
@@ -67,6 +66,7 @@ void MainWindow::on_loadButton_clicked()
             while(std::getline(ss, token, ',')){
                 // add everything to database row somehow
                 std::cout << token << std::endl;
+                segments.push_back(token);
             }
 
 

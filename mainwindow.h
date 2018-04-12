@@ -18,6 +18,9 @@ public:
 public slots:
 
 
+private slots:
+    void on_loadButton_clicked();
+
 private:
     Ui::MainWindow *ui;
 };
