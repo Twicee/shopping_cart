@@ -14,7 +14,7 @@
    <string>MainWindow</string>
   </property>
   <widget class="QWidget" name="centralWidget">
-   <widget class="QPushButton" name="pushButton">
+   <widget class="QPushButton" name="loadButton">
     <property name="geometry">
      <rect>
       <x>60</x>
@@ -27,7 +27,7 @@
      <string>Load Database</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="pushButton_2">
+   <widget class="QPushButton" name="addCartButton">
     <property name="geometry">
      <rect>
       <x>230</x>
@@ -40,7 +40,7 @@
      <string>Add to Cart</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="pushButton_3">
+   <widget class="QPushButton" name="showButton">
     <property name="geometry">
      <rect>
       <x>410</x>
