@@ -7,6 +7,7 @@
 #include <QDir>
 #include <string>
 #include <sstream>
+using namespace std;
 
 // Patterns to use:
 //1. You will exercise Abstract Factory Pattern, Composite Pattern,
@@ -68,8 +69,10 @@ void MainWindow::on_loadButton_clicked()
                 std::cout << token << std::endl;
                 segments.push_back(token);
             }
-
-
+            /*
+             * @681 implies we do not use project 1 as a database but rather the tablewidget
+             * When we hit checkout later we need to sort the data so I'm unsure how project 1 is being used
+            */
 
             //string type = segments[0];
             //string name = segments[1];
