@@ -62,14 +62,15 @@ void MainWindow::on_loadButton_clicked()
     // enable other buttons
     ui->addCartButton->setEnabled(true);
     ui->showButton->setEnabled(true);
-    // open file and read
-    std::ifstream file("Pets.csv");
+
+    // open pets file and read for mainTable
+    std::ifstream petsfile("Pets.csv");
     DataBuilder builder;
     builder.buildTable(ui->mainTable);
     Parser parser;
     parser.setBuilder(&builder);
 
-    if (file.is_open()){
+    if (petsfile.is_open()){
         std::string line = "";
         while (std::getline(file, line)){
             //some code here to tokenize the line into segements using "," as segmenting parameter
@@ -77,7 +78,21 @@ void MainWindow::on_loadButton_clicked()
         }
     }
     ui->mainTable = builder.returnTable();
-    file.close();
+    petsfile.close();
+
+    // Bundle Table construction now
+    std::ifstream bundlesfile("Bundles.csv");
+
+
+
+
+
+
+    bundlesfile.close;
+
+
+
+
             /*
             std::vector<std::string> segments;
             std::istringstream ss(line);

@@ -12,7 +12,6 @@ public:
         m_table = table;
     }
 
-
     virtual void addRow(std::vector<std::string> row) const{
         int row_value = m_table->rowCount();
         m_table->insertRow(m_table->rowCount());
