@@ -9,6 +9,9 @@
 #include <sstream>
 using namespace std;
 
+#include "databuilder.h"
+#include "parser.h"
+
 // Patterns to use:
 //1. You will exercise Abstract Factory Pattern, Composite Pattern,
 //    Builder pattern and Visitor Pattern in database construction.
@@ -41,6 +44,10 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->setupUi(this);
     ui->addCartButton->setEnabled(false);
     ui->showButton->setEnabled(false);
+
+    // SetTable
+    ui->mainTable->setColumnCount(4);
+
     // Current directory
     qDebug() << QDir::currentPath();
 }
@@ -57,10 +64,21 @@ void MainWindow::on_loadButton_clicked()
     ui->showButton->setEnabled(true);
     // open file and read
     std::ifstream file("Pets.csv");
+    DataBuilder builder;
+    builder.buildTable(ui->mainTable);
+    Parser parser;
+    parser.setBuilder(&builder);
+
     if (file.is_open()){
         std::string line = "";
         while (std::getline(file, line)){
             //some code here to tokenize the line into segements using "," as segmenting parameter
+            parser.tokenize(line); // pass line into parser
+        }
+    }
+    ui->mainTable = builder.returnTable();
+    file.close();
+            /*
             std::vector<std::string> segments;
             std::istringstream ss(line);
             std::string token = "";
@@ -69,6 +87,7 @@ void MainWindow::on_loadButton_clicked()
                 std::cout << token << std::endl;
                 segments.push_back(token);
             }
+            */
             /*
              * @681 implies we do not use project 1 as a database but rather the tablewidget
              * When we hit checkout later we need to sort the data so I'm unsure how project 1 is being used
@@ -81,7 +100,4 @@ void MainWindow::on_loadButton_clicked()
 
             //update table widget rows here
 
-        }
-    }
-    file.close();
 }
