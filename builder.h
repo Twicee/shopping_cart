@@ -7,10 +7,7 @@
 
 class Builder{
 public:
-    virtual void buildTable(QTableWidget* table) =0;
-    virtual void addRow(std::vector<std::string> row) const =0;
-    virtual QTableWidget* returnTable() =0;
-
+    virtual void add(std::vector<std::string> row) =0;
 };
 
 #endif // BUILDER_H

@@ -55,7 +55,8 @@ HEADERS += \
     SortableVector.h \
     parser.h \
     builder.h \
-    databuilder.h
+    databuilder.h \
+    petdatabuilder.h
 
 FORMS += \
         mainwindow.ui \

@@ -10,6 +10,7 @@
 
 #include "PetDatabase.h"
 #include "SearchableVector.h"
+#include "PetDatabaseSortable.h"
 
 class PetDatabaseSearchable : public PetDatabase, public SearchableVector{
 public:

@@ -8,10 +8,10 @@
 
 class Parser{
 protected:
-    Builder* m_dataBuilder;
+    Builder* m_Builder;
 public:
     void setBuilder(Builder* builder){
-        m_dataBuilder = builder;
+        m_Builder = builder;
     }
 
     void tokenize(std::string line){
@@ -23,7 +23,7 @@ public:
             //std::cout << token << std::endl;
             segments.push_back(token);
         }
-        m_dataBuilder->addRow(segments);
+        m_Builder->add(segments);
     }
 
 

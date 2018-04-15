@@ -8,11 +8,11 @@ class DataBuilder : public Builder{
 protected:
     QTableWidget* m_table;
 public:
-    virtual void buildTable(QTableWidget* table){
+    void buildThis(QTableWidget* table){
         m_table = table;
     }
 
-    virtual void addRow(std::vector<std::string> row) const{
+    virtual void add(std::vector<std::string> row){
         int row_value = m_table->rowCount();
         m_table->insertRow(m_table->rowCount());
         m_table->setItem(row_value,0,  new QTableWidgetItem(QString::fromStdString(row[1])));
