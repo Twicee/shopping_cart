@@ -22,14 +22,14 @@ public:
     // Default Constructor
     PetDatabaseSortable(){}
     
-    PetDatabaseSortable(vector<Pet*> pets) 
+    PetDatabaseSortable(std::vector<Pet*> pets)
     : PetDatabase(pets){} 
     
     virtual ~PetDatabaseSortable(){}
     
     virtual unsigned int getSize() const{
         return m_pets.size();
-    };
+    }
     // implement it
     virtual void swap(int i, int j){
         Pet* temp = m_pets[i];

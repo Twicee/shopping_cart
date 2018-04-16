@@ -14,7 +14,7 @@
 
 class PetDatabaseSearchableByName : public PetDatabaseSearchable{
 protected:
-    string m_query;
+    std::string m_query;
 public:
     // Default Constructor
     PetDatabaseSearchableByName() : PetDatabaseSearchable(){}
@@ -39,7 +39,7 @@ public:
             return 1;
     }
     
-    void setQuery(string q){
+    void setQuery(std::string q){
         m_query = q;
     }
     

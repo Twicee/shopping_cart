@@ -19,20 +19,20 @@
 
 class PetDatabase{
 protected:
-    vector<Pet*> m_pets;
+    std::vector<Pet*> m_pets;
     
 public:
-    PetDatabase(){};
+    PetDatabase(){}
     
-    PetDatabase(vector<Pet*> pets){
+    PetDatabase(std::vector<Pet*> pets){
         m_pets = pets;
-    };
+    }
     
     PetDatabase(PetDatabase* sortable){
-        for(int i = 0; i < sortable->getSize(); i++){
+        for(unsigned int i = 0; i < sortable->getSize(); i++){
             AddPet(sortable->getPet(i));
         }
-    };
+    }
     
     virtual ~PetDatabase(){}
     
@@ -47,7 +47,7 @@ public:
     }
     
     void DisplayRecords(){
-        for (int i = 0; i < m_pets.size(); i++){
+        for (unsigned int i = 0; i < m_pets.size(); i++){
             m_pets[i]->print();
         }
     }

@@ -7,7 +7,7 @@
 
 class Builder{
 public:
-    virtual void add(std::vector<std::string> row) =0;
+    virtual void add(std::vector<std::vector<std::string> > array) =0;
 };
 
 #endif // BUILDER_H

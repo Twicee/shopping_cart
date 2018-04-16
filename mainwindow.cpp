@@ -7,11 +7,10 @@
 #include <QDir>
 #include <string>
 #include <sstream>
-using namespace std;
+//using namespace std;
 
 #include "databuilder.h"
-#include "petdatabuilder.h"
-#include "parser.h"
+#include "fileparser.h"
 #include "PetDatabaseSearchableByName.h"
 
 // Patterns to use:
@@ -67,74 +66,24 @@ void MainWindow::on_loadButton_clicked()
 
     // open pets file and read for mainTable
     std::ifstream petsfile("Pets.csv");
+
+    // ********* The maintable must be sorted by name ***********
+    // *********** fluffy isnt working ***********
     DataBuilder builder;
     builder.buildThis(ui->mainTable);
-    Parser parser;
-    parser.setBuilder(&builder);
+    FileParser testParser;
+    testParser.setBuilder(&builder);
+    testParser.tokenize(&petsfile);
 
-    if (petsfile.is_open()){
-        std::string line = "";
-        while (std::getline(petsfile, line)){
-            //some code here to tokenize the line into segements using "," as segmenting parameter
-            parser.tokenize(line); // pass line into parser
-        }
-    }
-
-    //std::cout << "Here" << std::endl;
-    vector<Pet*> petVector;
-    PetDataBuilder petBuilder;
-    petBuilder.buildThis(&petVector);
-    parser.setBuilder(&petBuilder);
-
-
+    //PetDatabaseSearchableByName petSearchableByName(petVector);
+    //std::cout << petVector.size() << std::endl;
+    //petSearchableByName.DisplayRecords();
 
 
     petsfile.close();
-
-    // Bundle Table construction now
-    std::ifstream bundlesfile("Bundles.csv");
-    // make a petsdatabase out of the bundle and pets files information
-    // use a visitor to visit all the pets inside
-    // then construct the bundleTable
-
-
-    // Bundle name, total price from file
-    // Savings is calculated from table
-
-    // 1. build initally with data from file
-    // 2. calculate savings
-    // 3. add to table by hand?
-
-    // 1. callculate savings
-    // 2. add to file data into parser
-    // 3. pass it all into builder
-
-    bundlesfile.close();
-
-
-
-
-            /*
-            std::vector<std::string> segments;
-            std::istringstream ss(line);
-            std::string token = "";
-            while(std::getline(ss, token, ',')){
-                // add everything to database row somehow
-                std::cout << token << std::endl;
-                segments.push_back(token);
-            }
-            */
-            /*
-             * @681 implies we do not use project 1 as a database but rather the tablewidget
-             * When we hit checkout later we need to sort the data so I'm unsure how project 1 is being used
-            */
-
-            /*string type = segments[0];
-            //string name = segments[1];
-            //double price = stod(segments[4]);
-            //string special;   // you might have to look at 4 cases (Gogs, Fish, Bird, Cat cases to store values in special)
-
-            //update table widget rows here
-            */
-
+    ui->loadButton->setEnabled(false);
 }
+
+
+
+

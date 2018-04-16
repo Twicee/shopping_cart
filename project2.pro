@@ -56,7 +56,8 @@ HEADERS += \
     parser.h \
     builder.h \
     databuilder.h \
-    petdatabuilder.h
+    birdbuilder.h \
+    fileparser.h
 
 FORMS += \
         mainwindow.ui \
