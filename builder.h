@@ -1,13 +1,18 @@
 #ifndef BUILDER_H
 #define BUILDER_H
-
-#include <QTableWidget>
 #include <string>
-#include <vector>
+using namespace std;
+#include "Pet.h"
+#include "PetDatabase.h"
+#include "PetDatabaseSortableByName.h"
 
-class Builder{
+class Builder {
 public:
-    virtual void add(std::vector<std::vector<std::string> > array) =0;
+    virtual void addCat(string)=0;
+    virtual void addDog(string)=0;
+    virtual void addFish(string)=0;
+    virtual void addBird(string)=0;
+    virtual vector<Pet*> getDatabase()=0;
 };
 
 #endif // BUILDER_H

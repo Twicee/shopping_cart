@@ -53,11 +53,10 @@ HEADERS += \
     PetDatabaseSortableByWeight.h \
     SearchableVector.h \
     SortableVector.h \
-    parser.h \
     builder.h \
-    databuilder.h \
-    birdbuilder.h \
-    fileparser.h
+    builder.h \
+    databasebuilder.h \
+    databaseparser.h
 
 FORMS += \
         mainwindow.ui \

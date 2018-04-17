@@ -9,9 +9,12 @@
 #include <sstream>
 //using namespace std;
 
-#include "databuilder.h"
-#include "fileparser.h"
-#include "PetDatabaseSearchableByName.h"
+#include "databasebuilder.h"
+#include "databaseparser.h"
+#include "PetDatabase.h"
+#include "PetDatabaseSortableByName.h"
+#include "BubbleSortDecreasing.h"
+#include "BubbleSortIncreasing.h"
 
 // Patterns to use:
 //1. You will exercise Abstract Factory Pattern, Composite Pattern,
@@ -65,22 +68,20 @@ void MainWindow::on_loadButton_clicked()
     ui->showButton->setEnabled(true);
 
     // open pets file and read for mainTable
-    std::ifstream petsfile("Pets.csv");
+    string file = "Pets.csv";
 
     // ********* The maintable must be sorted by name ***********
     // *********** fluffy isnt working ***********
-    DataBuilder builder;
-    builder.buildThis(ui->mainTable);
-    FileParser testParser;
-    testParser.setBuilder(&builder);
-    testParser.tokenize(&petsfile);
+    DatabaseBuilder builder;
+    DatabaseParser parser;
+    parser.setBuilder(&builder);
+    parser.parse(file);
+    cout << "FILE PARSED" << endl;
+    vector<Pet*> database = builder.getDatabase();
+    cout << "database returned" << endl;
+    PetDatabaseSortableByName petDatabaseSortableByName(database);
+    petDatabaseSortableByName.DisplayRecords();
 
-    //PetDatabaseSearchableByName petSearchableByName(petVector);
-    //std::cout << petVector.size() << std::endl;
-    //petSearchableByName.DisplayRecords();
-
-
-    petsfile.close();
     ui->loadButton->setEnabled(false);
 }
 

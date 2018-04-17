@@ -48,6 +48,8 @@ public:
     
     void DisplayRecords(){
         for (unsigned int i = 0; i < m_pets.size(); i++){
+            cout << "Failing line 52 in PetDatabase.h"<< endl;
+            cout << m_pets.size() << endl;
             m_pets[i]->print();
         }
     }
