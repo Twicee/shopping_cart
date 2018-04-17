@@ -30,7 +30,7 @@ public:
     // Constructor
     Bird(std::string name, std::string type, double price, unsigned int weight, 
             bool nocturn)
-    : Pet(name,type,price,weight){
+    : Pet(name,type,price,weight,"Bird"){
         m_nocturn = nocturn;
     }
     

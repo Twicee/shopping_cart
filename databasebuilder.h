@@ -4,6 +4,7 @@
 #include <string>
 #include <fstream>
 #include <vector>
+#include <sstream>
 using namespace std;
 #include "Pet.h"
 #include "Cat.h"
@@ -25,13 +26,15 @@ public:
         while (getline(ss,token,',')){
             segments.push_back(token);
         }
+        std::string modifier = "Diurnal ";
         bool special = false;
         if (segments[5]=="true"){
+            modifier = "Nocturnal ";
             special = true;
         }
         double price = stod(segments[4]);
         unsigned int weight = stoi(segments[3]);
-        Bird* birdPet = new Bird(segments[1],segments[2],weight,price,special);
+        Bird* birdPet = new Bird(segments[1],(modifier + segments[2]),price,weight,special);
         petVector.push_back(birdPet);
 
     }
@@ -43,13 +46,15 @@ public:
         while (getline(ss,token,',')){
             segments.push_back(token);
         }
+        std::string modifier = "";
         bool special = false;
         if (segments[5]=="true"){
+            modifier = "Fluffy ";
             special = true;
         }
         double price = stod(segments[4]);
         unsigned int weight = stoi(segments[3]);
-        Cat* catPet = new Cat(segments[1],segments[2],weight,price,special);
+        Cat* catPet = new Cat(segments[1],(modifier + segments[2]),price,weight,special);
         petVector.push_back(catPet);
     }
 
@@ -62,7 +67,7 @@ public:
         }
         double price = stod(segments[4]);
         unsigned int weight = stoi(segments[3]);
-        Dog* dogPet = new Dog(segments[1],segments[2],weight,price,segments[5]);
+        Dog* dogPet = new Dog(segments[1],segments[2],price,weight,segments[5]);
         petVector.push_back(dogPet);
     }
 
@@ -73,9 +78,10 @@ public:
         while (getline(ss,token,',')){
             segments.push_back(token);
         }
+        std::string modifier = (segments[5] + " ");
         double price = stod(segments[4]);
         unsigned int weight = stoi(segments[3]);
-        Fish* fishPet = new Fish(segments[1],segments[2],weight,price,segments[5]);
+        Fish* fishPet = new Fish(segments[1],(modifier + segments[2]),price,weight,segments[5]);
         petVector.push_back(fishPet);
     }
 

@@ -11,7 +11,7 @@ class DatabaseParser{
 protected:
     Builder* m_Builder;
 public:
-    void setBuilder(DatabaseBuilder* builder){
+    void setBuilder(Builder* builder){
         m_Builder = builder;
     }
 

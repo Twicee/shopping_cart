@@ -30,7 +30,7 @@ public:
     // Constructor
     Fish(std::string name, std::string type, double price, unsigned int weight, 
             std::string enviro)
-    : Pet(name,type,price,weight){
+    : Pet(name,type,price,weight,"Fish"){
         m_enviro = enviro;
     }
     

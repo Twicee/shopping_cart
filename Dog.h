@@ -31,7 +31,7 @@ public:
     // Constructor
     Dog(std::string name, std::string type, double price, unsigned int weight, 
             std::string breed)
-    : Pet(name,type,price,weight){
+    : Pet(name,type,price,weight,"Dog"){
         m_breed = breed;
     }
     

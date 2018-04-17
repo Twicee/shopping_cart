@@ -30,7 +30,7 @@ public:
     
     // Constructor
     Cat(std::string name, std::string type, double price, unsigned int weight, bool fluffy)
-    : Pet(name,type,price,weight){
+    : Pet(name,type,price,weight,"Cat"){
         m_fluffy = fluffy;
     }
     

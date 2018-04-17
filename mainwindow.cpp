@@ -70,7 +70,7 @@ void MainWindow::on_loadButton_clicked()
     // open pets file and read for mainTable
     string file = "Pets.csv";
 
-    // ********* The maintable must be sorted by name ***********
+    // builds a petvector for use in the petdatabase classes
     DatabaseBuilder builder;
     DatabaseParser parser;
     parser.setBuilder(&builder);
@@ -81,6 +81,30 @@ void MainWindow::on_loadButton_clicked()
     bs.sort(&petDatabaseSortableByName);
     petDatabaseSortableByName.DisplayRecords();
 
+    // returns sorted database
+    database = petDatabaseSortableByName.returnDatabase();
+
+    // construct main table
+    for (unsigned int i = 0; i < database.size(); i++){
+        std::string name = database[i]->GetName();
+        std::string animal = database[i]->GetAnimal();
+
+        // need to fix presicion for price *******
+        std::ostringstream converter;
+        converter << std::setprecision(4) << database[i]->GetPrice();
+        std::string price = converter.str();
+
+        std::string type = database[i]->GetType();
+
+        int row_number = ui->mainTable->rowCount();
+        ui->mainTable->insertRow(ui->mainTable->rowCount());
+        ui->mainTable->setItem(row_number, 0,  new QTableWidgetItem(QString::fromStdString(name)));
+        ui->mainTable->setItem(row_number, 1,  new QTableWidgetItem(QString::fromStdString(animal)));
+        ui->mainTable->setItem(row_number, 2,  new QTableWidgetItem(QString::fromStdString(price)));
+        ui->mainTable->setItem(row_number, 3,  new QTableWidgetItem(QString::fromStdString(type)));
+    }
+
+
     // Ideas for building table:
     // Could use a visitor with a pointer to the maintable to construct it. It could accept a petDatabase so we could import
     // PetDatabaseSortablebyName into it. Does that follow the pattern exactly?
@@ -90,6 +114,13 @@ void MainWindow::on_loadButton_clicked()
     // petVector = PetDatabaseSortableByName->returnVector() --->
     // TableParser(petVector)---->TableBuilder(this would use a pointer to the main table, so not sure if it matches the pattern?)
     // also table->setRowCount(0); will auto delete all rows
+
+    /*
+    TableParser Tparser;
+    TableBuilder Tbuilder;
+    parser.setBuilder(&Tbuilder);
+    parser.parse(database);
+    */
 
 
     ui->loadButton->setEnabled(false);

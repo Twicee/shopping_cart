@@ -20,6 +20,7 @@ using namespace std;
 
 class Pet{
 protected:
+    std::string m_animal = "";
     std::string m_name = "";
     std::string m_type = "";
     unsigned int m_weight = 0;
@@ -30,11 +31,12 @@ public:
     Pet(){}
     
     // Constructor
-    Pet(std::string name, std::string type, double price, unsigned int weight){
+    Pet(std::string name, std::string type, double price, unsigned int weight, string animal){
         m_name = name;
         m_type = type;
         m_weight = weight;
         m_price = price;
+        m_animal = animal;
     }
     
     // Destructor
@@ -47,6 +49,7 @@ public:
             m_type = p.m_type;
             m_weight = p.m_weight;
             m_price = p.m_price;
+            m_animal = p.m_animal;
         }
     }
     
@@ -73,6 +76,10 @@ public:
     }
     double GetPrice() const{
         return m_price;
+    }
+
+    std::string GetAnimal() const {
+        return m_animal;
     }
     
     // Setters

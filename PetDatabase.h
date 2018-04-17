@@ -51,6 +51,10 @@ public:
             m_pets[i]->print();
         }
     }
+
+    std::vector<Pet*> returnDatabase(){
+        return m_pets;
+    }
     
 };
 
