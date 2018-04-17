@@ -71,7 +71,6 @@ void MainWindow::on_loadButton_clicked()
     string file = "Pets.csv";
 
     // ********* The maintable must be sorted by name ***********
-    // *********** fluffy isnt working ***********
     DatabaseBuilder builder;
     DatabaseParser parser;
     parser.setBuilder(&builder);
@@ -81,6 +80,16 @@ void MainWindow::on_loadButton_clicked()
     PetDatabaseSortableByName petDatabaseSortableByName(database);
     bs.sort(&petDatabaseSortableByName);
     petDatabaseSortableByName.DisplayRecords();
+
+    // Ideas for building table:
+    // Could use a visitor with a pointer to the maintable to construct it. It could accept a petDatabase so we could import
+    // PetDatabaseSortablebyName into it. Does that follow the pattern exactly?
+
+    // Make another builder that uses a parser to parse petvectors? We could return sorted petvectors from PetDatabaseSortable
+    // and then input it into a parser and then into a builder?
+    // petVector = PetDatabaseSortableByName->returnVector() --->
+    // TableParser(petVector)---->TableBuilder(this would use a pointer to the main table, so not sure if it matches the pattern?)
+    // also table->setRowCount(0); will auto delete all rows
 
 
     ui->loadButton->setEnabled(false);
