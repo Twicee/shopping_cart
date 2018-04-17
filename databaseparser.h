@@ -21,10 +21,8 @@ public:
             string line = "";
             while(getline(csvFile,line)){
                 string petType = line.substr(0,line.find(','));
-                cout << "------TEST------" << endl;
                 if (petType == "Dog"){
                     m_Builder->addDog(line);
-                    cout << "-----WOOF-----" << endl;
                 }
                 else if (petType == "Cat"){
                     m_Builder->addCat(line);
@@ -41,7 +39,6 @@ public:
             }
         }
         csvFile.close();
-        cout << "FILE CLOSED" << endl;
     }
 
 };

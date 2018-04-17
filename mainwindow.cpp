@@ -76,11 +76,12 @@ void MainWindow::on_loadButton_clicked()
     DatabaseParser parser;
     parser.setBuilder(&builder);
     parser.parse(file);
-    cout << "FILE PARSED" << endl;
     vector<Pet*> database = builder.getDatabase();
-    cout << "database returned" << endl;
+    BubbleSortIncreasing bs;
     PetDatabaseSortableByName petDatabaseSortableByName(database);
+    bs.sort(&petDatabaseSortableByName);
     petDatabaseSortableByName.DisplayRecords();
+
 
     ui->loadButton->setEnabled(false);
 }

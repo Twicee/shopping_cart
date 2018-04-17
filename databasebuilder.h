@@ -31,8 +31,8 @@ public:
         }
         double price = stod(segments[4]);
         unsigned int weight = stoi(segments[3]);
-        Bird birdPet(segments[1],segments[2],weight,price,special);
-        petVector.push_back(&birdPet);
+        Bird* birdPet = new Bird(segments[1],segments[2],weight,price,special);
+        petVector.push_back(birdPet);
 
     }
 
@@ -49,8 +49,8 @@ public:
         }
         double price = stod(segments[4]);
         unsigned int weight = stoi(segments[3]);
-        Cat catPet(segments[1],segments[2],weight,price,special);
-        petVector.push_back(&catPet);
+        Cat* catPet = new Cat(segments[1],segments[2],weight,price,special);
+        petVector.push_back(catPet);
     }
 
     virtual void addDog(string traits){
@@ -62,8 +62,8 @@ public:
         }
         double price = stod(segments[4]);
         unsigned int weight = stoi(segments[3]);
-        Dog dogPet(segments[1],segments[2],weight,price,segments[5]);
-        petVector.push_back(&dogPet);
+        Dog* dogPet = new Dog(segments[1],segments[2],weight,price,segments[5]);
+        petVector.push_back(dogPet);
     }
 
     virtual void addFish(string traits){
@@ -75,14 +75,11 @@ public:
         }
         double price = stod(segments[4]);
         unsigned int weight = stoi(segments[3]);
-        Fish fishPet(segments[1],segments[2],weight,price,segments[5]);
-        petVector.push_back(&fishPet);
+        Fish* fishPet = new Fish(segments[1],segments[2],weight,price,segments[5]);
+        petVector.push_back(fishPet);
     }
 
     virtual vector<Pet*> getDatabase(){
-        //PetDatabaseSortableByName petDatabaseSortableByName(petVector);
-        cout << petVector.size() << endl;
-        cout << "DATABASE CREATED" << endl;
         return this->petVector;
     }
 };
