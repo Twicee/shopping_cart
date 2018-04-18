@@ -56,9 +56,12 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->addCartButton->setEnabled(false);
     ui->showCartButton->setEnabled(false);
 
-    // SetTable
+    // SetTables
     ui->mainTable->setColumnCount(4);
+    ui->mainTable->setSelectionBehavior(QAbstractItemView::SelectRows); //selects entire row when clicked
     ui->bundleTable->setColumnCount(3);
+    ui->bundleTable->setSelectionBehavior(QAbstractItemView::SelectRows);
+
 
     // Current directory
     //qDebug() << QDir::currentPath();
@@ -179,5 +182,13 @@ void MainWindow::on_loadButton_clicked()
 }
 
 
+// this will update listener's table
+void MainWindow::on_addCartButton_clicked()
+{
+    // testing
+    int row_num = ui->mainTable->currentRow(); //gets row selected
+    cout << "MainTable: " << row_num << endl;
 
-
+    row_num = ui->bundleTable->currentRow();
+    cout << "BundleTable: " << row_num << endl;
+}

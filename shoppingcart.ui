@@ -13,7 +13,7 @@
   <property name="windowTitle">
    <string>Dialog</string>
   </property>
-  <widget class="QPushButton" name="pushButton">
+  <widget class="QPushButton" name="deleteButton">
    <property name="geometry">
     <rect>
      <x>30</x>
@@ -23,10 +23,10 @@
     </rect>
    </property>
    <property name="text">
-    <string>PushButton</string>
+    <string>Delete</string>
    </property>
   </widget>
-  <widget class="QPushButton" name="pushButton_2">
+  <widget class="QPushButton" name="checkoutButton">
    <property name="geometry">
     <rect>
      <x>220</x>
@@ -36,10 +36,10 @@
     </rect>
    </property>
    <property name="text">
-    <string>PushButton</string>
+    <string>Checkout</string>
    </property>
   </widget>
-  <widget class="QTableWidget" name="tableWidget">
+  <widget class="QTableWidget" name="cartTable">
    <property name="geometry">
     <rect>
      <x>50</x>

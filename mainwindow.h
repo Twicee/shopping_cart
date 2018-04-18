@@ -22,6 +22,8 @@ public slots:
 private slots:
     void on_loadButton_clicked();
 
+    void on_addCartButton_clicked();
+
 private:
     Ui::MainWindow *ui;
     ShoppingCart* listener;
