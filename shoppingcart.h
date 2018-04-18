@@ -20,6 +20,7 @@ signals:
 
 public slots:
     void showOrHide();
+    void AddtoTable(std::vector<QString>);
 
 private:
     Ui::ShoppingCart *ui;

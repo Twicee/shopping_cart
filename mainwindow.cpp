@@ -71,9 +71,13 @@ MainWindow::MainWindow(QWidget *parent) :
 
     // Connections
     // showButton
-    // addCartButton
+    // ******************************doesnt work perfectly********************************8
     connect(ui->showCartButton,SIGNAL(clicked()),listener,SLOT(showOrHide())); // makes button show or hide cart depending if open
     connect(listener,SIGNAL(isShown(bool)),ui->showCartButton,SLOT(changeText(bool)));
+
+    // addtocart
+    connect(this,SIGNAL(AddtoCart(std::vector<QString>)),listener,SLOT(AddtoTable(std::vector<QString>)));
+
 
 }
 
@@ -185,10 +189,37 @@ void MainWindow::on_loadButton_clicked()
 // this will update listener's table
 void MainWindow::on_addCartButton_clicked()
 {
-    // testing
-    int row_num = ui->mainTable->currentRow(); //gets row selected
-    cout << "MainTable: " << row_num << endl;
+    // get table and row to iterate over
+    int table = tableInfo[0];
+    int row = tableInfo[1];
 
-    row_num = ui->bundleTable->currentRow();
-    cout << "BundleTable: " << row_num << endl;
+    std::vector<QString> itemVector;
+    if (table == 1){ // main table
+        int columnCount = ui->mainTable->columnCount();
+        for (int i = 0; i < columnCount; i++){
+            itemVector.push_back(ui->mainTable->item(row,i)->text());
+        }
+        emit AddtoCart(itemVector);
+    }
+    else if(table == 2){ //bundle table
+        int columnCount = ui->bundleTable->columnCount();
+        for (int i = 0; i < columnCount; i++){
+            itemVector.push_back(ui->bundleTable->item(row,i)->text());
+        }
+        emit AddtoCart(itemVector);
+    }
+}
+
+void MainWindow::on_mainTable_cellClicked(int row, int column)
+{
+    // tableInfo is a vector defined in the .h file
+    // it record the last table clicked on and the row
+    tableInfo[0] = 1;
+    tableInfo[1] = row;
+}
+
+void MainWindow::on_bundleTable_cellClicked(int row, int column)
+{
+    tableInfo[0] = 2;
+    tableInfo[1] = row;
 }
