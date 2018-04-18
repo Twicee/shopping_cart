@@ -26,7 +26,8 @@ DEFINES += QT_DEPRECATED_WARNINGS
 SOURCES += \
         main.cpp \
         mainwindow.cpp \
-    shoppingcart.cpp
+    shoppingcart.cpp \
+    showbutton.cpp
 
 HEADERS += \
         mainwindow.h \
@@ -58,7 +59,8 @@ HEADERS += \
     databasebuilder.h \
     databaseparser.h \
     visitor.h \
-    nonstackbasedsumvisitor.h
+    nonstackbasedsumvisitor.h \
+    showbutton.h
 
 FORMS += \
         mainwindow.ui \

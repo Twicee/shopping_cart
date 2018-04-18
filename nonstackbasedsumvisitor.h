@@ -35,7 +35,7 @@ public:
     }
 
     virtual void VisitPetDatabaseSortableByName(PetDatabaseSortableByName* database){
-        for (int i =0; i < database->getSize(); i++){
+        for (unsigned int i =0; i < database->getSize(); i++){
             database->getPet(i)->Accept(this);
         }
     }

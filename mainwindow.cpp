@@ -19,6 +19,9 @@
 #include "nonstackbasedsumvisitor.h"
 #include "BinarySearch.h"
 #include "PetDatabaseSearchableByName.h"
+#include "showbutton.h"
+
+#include "shoppingcart.h"
 
 // Patterns to use:
 //1. You will exercise Abstract Factory Pattern, Composite Pattern,
@@ -51,14 +54,24 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
     ui->addCartButton->setEnabled(false);
-    ui->showButton->setEnabled(false);
+    ui->showCartButton->setEnabled(false);
 
     // SetTable
     ui->mainTable->setColumnCount(4);
     ui->bundleTable->setColumnCount(3);
 
     // Current directory
-    qDebug() << QDir::currentPath();
+    //qDebug() << QDir::currentPath();
+
+    // Shopping cart setup
+    listener = new ShoppingCart(this); // defined in .h
+
+    // Connections
+    // showButton
+    // addCartButton
+    connect(ui->showCartButton,SIGNAL(clicked()),listener,SLOT(showOrHide())); // makes button show or hide cart depending if open
+    connect(listener,SIGNAL(isShown(bool)),ui->showCartButton,SLOT(changeText(bool)));
+
 }
 
 MainWindow::~MainWindow()
@@ -72,10 +85,6 @@ bool sortMatrix(const vector<string>& v1, const vector<string>& v2){
 
 void MainWindow::on_loadButton_clicked()
 {
-    // enable other buttons
-    ui->addCartButton->setEnabled(true);
-    ui->showButton->setEnabled(true);
-
     // open pets file and read for mainTable
     string file = "Pets.csv";
 
@@ -107,6 +116,7 @@ void MainWindow::on_loadButton_clicked()
         ui->mainTable->setItem(row_number, 3,  new QTableWidgetItem(QString::fromStdString(type)));
     }
 
+    // test?
     NonStackBasedSumVisitor nsbsv;
     database->Accept(&nsbsv);
     cout << nsbsv.getResult() << endl;
@@ -117,7 +127,7 @@ void MainWindow::on_loadButton_clicked()
     ifstream bundlesFile("Bundles.csv");
     if (bundlesFile.is_open()){
         string line = "";
-        vector<vector<string>> items;
+        vector<vector<string>> items;  //matrix
         while(getline(bundlesFile,line)){
             istringstream ss(line);
             string token = "";
@@ -129,10 +139,9 @@ void MainWindow::on_loadButton_clicked()
             }
 
             //Create a second database by searching the main database for the pets in each bundle
-            int sum = 0;
             PetDatabaseSortableByName* savingsDatabase = new PetDatabaseSortableByName();
-            for (int i = 2; i < segments.size(); i++){
-                PetDatabaseSearchableByName* SName = new PetDatabaseSearchableByName(database);
+            PetDatabaseSearchableByName* SName = new PetDatabaseSearchableByName(database);
+            for (unsigned int i = 2; i < segments.size(); i++){
                 SName->setQuery(segments[i]);
                 savingsDatabase->AddPet(SName->getPet(s.search(SName)));
             }
@@ -150,7 +159,7 @@ void MainWindow::on_loadButton_clicked()
 
         //table needs to be sorted by name and add data to table
         sort(items.begin(),items.end(),sortMatrix);
-        for (int j = 0; j < items.size(); j++){
+        for (unsigned int j = 0; j < items.size(); j++){
             bundleRow = ui->bundleTable->rowCount();
             ui->bundleTable->insertRow(bundleRow);
             ui->bundleTable->setItem(bundleRow,0,new QTableWidgetItem(QString::fromStdString(items[j][0]))); //name of bundle
@@ -165,6 +174,8 @@ void MainWindow::on_loadButton_clicked()
 
 
     ui->loadButton->setEnabled(false);
+    ui->addCartButton->setEnabled(true);
+    ui->showCartButton->setEnabled(true);
 }
 
 

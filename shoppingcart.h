@@ -15,6 +15,12 @@ public:
     explicit ShoppingCart(QWidget *parent = 0);
     ~ShoppingCart();
 
+signals:
+    void isShown(bool);
+
+public slots:
+    void showOrHide();
+
 private:
     Ui::ShoppingCart *ui;
 };

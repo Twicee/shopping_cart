@@ -12,3 +12,16 @@ ShoppingCart::~ShoppingCart()
 {
     delete ui;
 }
+
+
+void ShoppingCart::showOrHide(){
+    if (isVisible() == false){
+        show();
+        emit isShown(true);
+    }
+    else{
+        hide();
+        emit isShown(false);
+    }
+}
+
