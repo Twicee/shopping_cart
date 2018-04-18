@@ -18,6 +18,8 @@ class MainWindow : public QMainWindow
 public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
+    MainWindow* returnPointer();
+    std::vector<QString> getActiveTableRow();
 
 signals:
     void AddtoCart(std::vector<QString>);
@@ -28,8 +30,6 @@ public slots:
 private slots:
     void on_loadButton_clicked();
 
-    void on_addCartButton_clicked();
-
     void on_mainTable_cellClicked(int row, int column);
 
     void on_bundleTable_cellClicked(int row, int column);
@@ -37,7 +37,7 @@ private slots:
 private:
     Ui::MainWindow *ui;
     ShoppingCart* listener;
-    std::vector<int> tableInfo{-1,-1};
+    std::vector<int> m_tableInfo{-1,-1};
 };
 
 #endif // MAINWINDOW_H

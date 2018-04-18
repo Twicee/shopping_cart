@@ -27,7 +27,7 @@
      <string>Load Database</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="addCartButton">
+   <widget class="addButton" name="addCartButton">
     <property name="geometry">
      <rect>
       <x>320</x>
@@ -135,6 +135,11 @@
    <class>showButton</class>
    <extends>QPushButton</extends>
    <header>showbutton.h</header>
+  </customwidget>
+  <customwidget>
+   <class>addButton</class>
+   <extends>QPushButton</extends>
+   <header>addbutton.h</header>
   </customwidget>
  </customwidgets>
  <resources/>

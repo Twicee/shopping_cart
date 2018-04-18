@@ -20,6 +20,7 @@
 #include "BinarySearch.h"
 #include "PetDatabaseSearchableByName.h"
 #include "showbutton.h"
+#include "addbutton.h"
 
 #include "shoppingcart.h"
 
@@ -56,6 +57,8 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->addCartButton->setEnabled(false);
     ui->showCartButton->setEnabled(false);
 
+    ui->addCartButton->setMainWindow(this);
+
     // SetTables
     ui->mainTable->setColumnCount(4);
     ui->mainTable->setSelectionBehavior(QAbstractItemView::SelectRows); //selects entire row when clicked
@@ -76,8 +79,8 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(listener,SIGNAL(isShown(bool)),ui->showCartButton,SLOT(changeText(bool)));
 
     // addtocart
-    connect(this,SIGNAL(AddtoCart(std::vector<QString>)),listener,SLOT(AddtoTable(std::vector<QString>)));
-
+    connect(ui->addCartButton,SIGNAL(clicked()),ui->addCartButton,SLOT(AddClicked()));
+    connect(ui->addCartButton,SIGNAL(AddtoCart(std::vector<QString>)),listener,SLOT(AddtoTable(std::vector<QString>)));
 
 }
 
@@ -89,6 +92,15 @@ MainWindow::~MainWindow()
 bool sortMatrix(const vector<string>& v1, const vector<string>& v2){
     return v1[0] < v2[0];
 }
+
+MainWindow* MainWindow::returnPointer(){
+    return this;
+}
+
+//std::vector<int> MainWindow::getTableInfo(){
+//    return m_tableInfo;
+//}
+
 
 void MainWindow::on_loadButton_clicked()
 {
@@ -186,40 +198,39 @@ void MainWindow::on_loadButton_clicked()
 }
 
 
-// this will update listener's table
-void MainWindow::on_addCartButton_clicked()
-{
-    // get table and row to iterate over
-    int table = tableInfo[0];
-    int row = tableInfo[1];
+std::vector<QString> MainWindow::getActiveTableRow(){
+    int table = m_tableInfo[0];
+    int row = m_tableInfo[1];
 
     std::vector<QString> itemVector;
     if (table == 1){ // main table
+        // so shoppingcart knows witch index to use
+        itemVector.push_back(QString::fromStdString("Pet"));
         int columnCount = ui->mainTable->columnCount();
         for (int i = 0; i < columnCount; i++){
             itemVector.push_back(ui->mainTable->item(row,i)->text());
         }
-        emit AddtoCart(itemVector);
     }
     else if(table == 2){ //bundle table
+        itemVector.push_back(QString::fromStdString("Bundle"));
         int columnCount = ui->bundleTable->columnCount();
         for (int i = 0; i < columnCount; i++){
             itemVector.push_back(ui->bundleTable->item(row,i)->text());
         }
-        emit AddtoCart(itemVector);
     }
+    return itemVector;
 }
 
 void MainWindow::on_mainTable_cellClicked(int row, int column)
 {
     // tableInfo is a vector defined in the .h file
-    // it record the last table clicked on and the row
-    tableInfo[0] = 1;
-    tableInfo[1] = row;
+    // it records the last table clicked on and the row
+    m_tableInfo[0] = 1;
+    m_tableInfo[1] = row;
 }
 
 void MainWindow::on_bundleTable_cellClicked(int row, int column)
 {
-    tableInfo[0] = 2;
-    tableInfo[1] = row;
+    m_tableInfo[0] = 2;
+    m_tableInfo[1] = row;
 }

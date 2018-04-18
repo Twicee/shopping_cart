@@ -27,7 +27,8 @@ SOURCES += \
         main.cpp \
         mainwindow.cpp \
     shoppingcart.cpp \
-    showbutton.cpp
+    showbutton.cpp \
+    addbutton.cpp
 
 HEADERS += \
         mainwindow.h \
@@ -60,7 +61,8 @@ HEADERS += \
     databaseparser.h \
     visitor.h \
     nonstackbasedsumvisitor.h \
-    showbutton.h
+    showbutton.h \
+    addbutton.h
 
 FORMS += \
         mainwindow.ui \
