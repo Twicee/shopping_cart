@@ -17,6 +17,7 @@
 #include <string>
 #include <iostream>
 using namespace std;
+#include "visitor.h"
 
 class Pet{
 protected:
@@ -63,6 +64,8 @@ public:
         }
         return *this;
     }
+
+    virtual void Accept(Visitor*)=0;
     
     // Getters
     std::string GetName() const{

@@ -16,6 +16,7 @@
 
 #include <vector>
 #include "Pet.h"
+#include "visitor.h"
 
 class PetDatabase{
 protected:
@@ -55,6 +56,7 @@ public:
     std::vector<Pet*> returnDatabase(){
         return m_pets;
     }
+
     
 };
 

@@ -7,6 +7,7 @@
 #include <QDir>
 #include <string>
 #include <sstream>
+#include <algorithm>
 //using namespace std;
 
 #include "databasebuilder.h"
@@ -15,6 +16,9 @@
 #include "PetDatabaseSortableByName.h"
 #include "BubbleSortDecreasing.h"
 #include "BubbleSortIncreasing.h"
+#include "nonstackbasedsumvisitor.h"
+#include "BinarySearch.h"
+#include "PetDatabaseSearchableByName.h"
 
 // Patterns to use:
 //1. You will exercise Abstract Factory Pattern, Composite Pattern,
@@ -51,6 +55,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
     // SetTable
     ui->mainTable->setColumnCount(4);
+    ui->bundleTable->setColumnCount(3);
 
     // Current directory
     qDebug() << QDir::currentPath();
@@ -59,6 +64,10 @@ MainWindow::MainWindow(QWidget *parent) :
 MainWindow::~MainWindow()
 {
     delete ui;
+}
+
+bool sortMatrix(const vector<string>& v1, const vector<string>& v2){
+    return v1[0] < v2[0];
 }
 
 void MainWindow::on_loadButton_clicked()
@@ -70,31 +79,25 @@ void MainWindow::on_loadButton_clicked()
     // open pets file and read for mainTable
     string file = "Pets.csv";
 
-    // builds a petvector for use in the petdatabase classes
+    // uses builder pattern and abstract factory to build a PetDatabaseSortableByName database
     DatabaseBuilder builder;
     DatabaseParser parser;
     parser.setBuilder(&builder);
     parser.parse(file);
-    vector<Pet*> database = builder.getDatabase();
-    BubbleSortIncreasing bs;
-    PetDatabaseSortableByName petDatabaseSortableByName(database);
-    bs.sort(&petDatabaseSortableByName);
-    petDatabaseSortableByName.DisplayRecords();
-
-    // returns sorted database
-    database = petDatabaseSortableByName.returnDatabase();
+    PetDatabaseSortableByName* database = builder.getDatabase();
+    database->DisplayRecords();
 
     // construct main table
-    for (unsigned int i = 0; i < database.size(); i++){
-        std::string name = database[i]->GetName();
-        std::string animal = database[i]->GetAnimal();
+    for (unsigned int i = 0; i < database->getSize(); i++){
+        std::string name = database->getPet(i)->GetName();
+        std::string animal = database->getPet(i)->GetAnimal();
 
         // need to fix presicion for price *******
         std::ostringstream converter;
-        converter << std::setprecision(4) << database[i]->GetPrice();
+        converter << std::setprecision(4) << database->getPet(i)->GetPrice();
         std::string price = converter.str();
 
-        std::string type = database[i]->GetType();
+        std::string type = database->getPet(i)->GetType();
 
         int row_number = ui->mainTable->rowCount();
         ui->mainTable->insertRow(ui->mainTable->rowCount());
@@ -104,23 +107,61 @@ void MainWindow::on_loadButton_clicked()
         ui->mainTable->setItem(row_number, 3,  new QTableWidgetItem(QString::fromStdString(type)));
     }
 
+    NonStackBasedSumVisitor nsbsv;
+    database->Accept(&nsbsv);
+    cout << nsbsv.getResult() << endl;
 
-    // Ideas for building table:
-    // Could use a visitor with a pointer to the maintable to construct it. It could accept a petDatabase so we could import
-    // PetDatabaseSortablebyName into it. Does that follow the pattern exactly?
+    int bundleRow = ui->bundleTable->rowCount();
+    BinarySearch s;
+    //read from bundles file
+    ifstream bundlesFile("Bundles.csv");
+    if (bundlesFile.is_open()){
+        string line = "";
+        vector<vector<string>> items;
+        while(getline(bundlesFile,line)){
+            istringstream ss(line);
+            string token = "";
+            vector<string> segments;
 
-    // Make another builder that uses a parser to parse petvectors? We could return sorted petvectors from PetDatabaseSortable
-    // and then input it into a parser and then into a builder?
-    // petVector = PetDatabaseSortableByName->returnVector() --->
-    // TableParser(petVector)---->TableBuilder(this would use a pointer to the main table, so not sure if it matches the pattern?)
-    // also table->setRowCount(0); will auto delete all rows
+            //for each line in the file create a vector of tokens to parse through
+            while(getline(ss,token,',')){
+                segments.push_back(token);
+            }
 
-    /*
-    TableParser Tparser;
-    TableBuilder Tbuilder;
-    parser.setBuilder(&Tbuilder);
-    parser.parse(database);
-    */
+            //Create a second database by searching the main database for the pets in each bundle
+            int sum = 0;
+            PetDatabaseSortableByName* savingsDatabase = new PetDatabaseSortableByName();
+            for (int i = 2; i < segments.size(); i++){
+                PetDatabaseSearchableByName* SName = new PetDatabaseSearchableByName(database);
+                SName->setQuery(segments[i]);
+                savingsDatabase->AddPet(SName->getPet(s.search(SName)));
+            }
+
+            //Use the visitor and composite and composite pattern to get total price of the bundle for each
+            //newly created database
+            NonStackBasedSumVisitor nsbsv;
+            savingsDatabase->Accept(&nsbsv);
+            double initialCost = nsbsv.getResult();
+
+            //add to matrix so we can store the data in a table
+            segments.push_back(to_string(initialCost));
+            items.push_back(segments);
+        }
+
+        //table needs to be sorted by name and add data to table
+        sort(items.begin(),items.end(),sortMatrix);
+        for (int j = 0; j < items.size(); j++){
+            bundleRow = ui->bundleTable->rowCount();
+            ui->bundleTable->insertRow(bundleRow);
+            ui->bundleTable->setItem(bundleRow,0,new QTableWidgetItem(QString::fromStdString(items[j][0]))); //name of bundle
+            ui->bundleTable->setItem(bundleRow,1,new QTableWidgetItem(QString::fromStdString(items[j][1]))); //original price of bundle
+            double savings = (stod(items[j].back())-stod(items[j][1]))/stod(items[j].back())*100;  //Calculate savings usings values obtain from visitor pattern
+            std::ostringstream converter;
+            converter << std::setprecision(3) << savings;
+            std::string strSavings = converter.str()+"%";
+            ui->bundleTable->setItem(bundleRow,2,new QTableWidgetItem(QString::fromStdString(strSavings)));
+        }
+    }
 
 
     ui->loadButton->setEnabled(false);

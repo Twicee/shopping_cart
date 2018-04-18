@@ -12,7 +12,7 @@ public:
     virtual void addDog(string)=0;
     virtual void addFish(string)=0;
     virtual void addBird(string)=0;
-    virtual vector<Pet*> getDatabase()=0;
+    virtual PetDatabaseSortableByName* getDatabase()=0;
 };
 
 #endif // BUILDER_H

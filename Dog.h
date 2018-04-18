@@ -54,6 +54,11 @@ public:
         }
         return *this;
     }
+
+    virtual void Accept(Visitor *v){
+        v->VisitDog(this);
+    }
+
     std::string GetBreed() const {
         return m_breed;
     }

@@ -14,6 +14,7 @@ using namespace std;
 #include "PetDatabase.h"
 #include "PetDatabaseSortableByName.h"
 #include "builder.h"
+#include "BubbleSortIncreasing.h"
 
 class DatabaseBuilder: public Builder {
 protected:
@@ -85,8 +86,11 @@ public:
         petVector.push_back(fishPet);
     }
 
-    virtual vector<Pet*> getDatabase(){
-        return this->petVector;
+    virtual PetDatabaseSortableByName* getDatabase(){
+        PetDatabaseSortableByName* petDatabaseSortableByName = new PetDatabaseSortableByName(petVector);
+        BubbleSortIncreasing bs;
+        bs.sort(petDatabaseSortableByName);
+        return petDatabaseSortableByName;
     }
 };
 #endif // DATABASEBUILDER_H

@@ -56,7 +56,9 @@ HEADERS += \
     builder.h \
     builder.h \
     databasebuilder.h \
-    databaseparser.h
+    databaseparser.h \
+    visitor.h \
+    nonstackbasedsumvisitor.h
 
 FORMS += \
         mainwindow.ui \

@@ -18,6 +18,7 @@
 #include <string>
 #include <iostream>
 #include <iomanip>
+#include "visitor.h"
 
 class Bird : public Pet{
 protected:
@@ -52,6 +53,10 @@ public:
             m_nocturn = brd.m_nocturn;
         }
         return *this;
+    }
+
+    virtual void Accept(Visitor *v){
+        v->VisitBird(this);
     }
     
     bool GetNocturnality() const {
