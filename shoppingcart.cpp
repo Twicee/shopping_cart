@@ -4,6 +4,9 @@
 #include <QKeyEvent>
 #include "deletebutton.h"
 #include <iostream>
+#include "checkoutbutton.h"
+#include <QPalette>
+#include <QColorDialog>
 
 ShoppingCart::ShoppingCart(QWidget *parent) :
     QDialog(parent),
@@ -12,9 +15,16 @@ ShoppingCart::ShoppingCart(QWidget *parent) :
     ui->setupUi(this);
     ui->shoppingTable->setSelectionBehavior(QAbstractItemView::SelectRows);
     ui->deleteRowButton->setMainWindow(this);
+    // change the fucking color;
 
     ui->shoppingTable->setColumnCount(2);
+    ui->shoppingTable->setEditTriggers(QAbstractItemView::NoEditTriggers);
+
+
     connect(ui->deleteRowButton,SIGNAL(clicked()),ui->deleteRowButton,SLOT(deleteRow())); // deletes selection
+    connect(ui->checkoutPriceButton,SIGNAL(clicked()),ui->shoppingTable,SLOT(checkout())); // checkout
+    connect(ui->shoppingTable,SIGNAL(changeLabel(double)),ui->outputLabel,SLOT(setNum(double))); // checkout
+
 
 }
 

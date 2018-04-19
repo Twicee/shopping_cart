@@ -6,6 +6,7 @@
 #include "Dog.h"
 #include "Fish.h"
 #include "PetDatabaseSortableByName.h"
+#include "PetDatabaseSortableByPrice.h"
 
 class NonStackBasedSumVisitor: public Visitor{
 private:
@@ -35,6 +36,12 @@ public:
     }
 
     virtual void VisitPetDatabaseSortableByName(PetDatabaseSortableByName* database){
+        for (unsigned int i =0; i < database->getSize(); i++){
+            database->getPet(i)->Accept(this);
+        }
+    }
+
+    virtual void VisitPetDatabaseSortableByPrice(PetDatabaseSortableByPrice* database){
         for (unsigned int i =0; i < database->getSize(); i++){
             database->getPet(i)->Accept(this);
         }

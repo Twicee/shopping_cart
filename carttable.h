@@ -9,7 +9,11 @@ class cartTable : public QTableWidget{
 public:
     cartTable(QWidget* qw):QTableWidget(qw){};
 
+signals:
+    void changeLabel(double);
+
 public slots:
+   void checkout();
    void AddtoTable(std::vector<QString> itemVector);
 };
 

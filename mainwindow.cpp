@@ -58,8 +58,10 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->mainTable->setColumnCount(4);
     //selects entire row when clicked
     ui->mainTable->setSelectionBehavior(QAbstractItemView::SelectRows);
+    ui->mainTable->setEditTriggers(QAbstractItemView::NoEditTriggers);
     ui->bundleTable->setColumnCount(3);
     ui->bundleTable->setSelectionBehavior(QAbstractItemView::SelectRows);
+    ui->bundleTable->setEditTriggers(QAbstractItemView::NoEditTriggers);
 
     // Shopping cart setup
     listener = new ShoppingCart(this); // defined in .h

@@ -6,6 +6,8 @@ class Cat;
 class Dog;
 class Fish;
 class PetDatabaseSortableByName;
+class PetDatabaseSortableByPrice;
+
 
 class Visitor {
 public:
@@ -14,5 +16,6 @@ public:
     virtual void VisitDog(Dog*)=0;
     virtual void VisitFish(Fish*)=0;
     virtual void VisitPetDatabaseSortableByName(PetDatabaseSortableByName*)=0;
+    virtual void VisitPetDatabaseSortableByPrice(PetDatabaseSortableByPrice*)=0;
 };
 #endif // VISITOR_H

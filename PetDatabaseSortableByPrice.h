@@ -16,6 +16,8 @@
 #include <vector>
 
 #include "PetDatabaseSortable.h"
+#include "visitor.h"
+
 
 class PetDatabaseSortableByPrice : public PetDatabaseSortable{
 public:
@@ -36,6 +38,10 @@ public:
             return false;
     }
     
+    virtual void Accept(Visitor* v){
+        v->VisitPetDatabaseSortableByPrice(this);
+    }
+
 };
 
 

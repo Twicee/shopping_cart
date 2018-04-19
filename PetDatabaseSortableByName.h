@@ -29,7 +29,7 @@ public:
         else
             return false;
     }
-    
+
     virtual void Accept(Visitor* v){
         v->VisitPetDatabaseSortableByName(this);
     }
