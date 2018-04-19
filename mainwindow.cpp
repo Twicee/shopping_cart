@@ -111,7 +111,7 @@ void MainWindow::on_loadButton_clicked()
 
         // need to fix presicion for price *******
         std::ostringstream converter;
-        converter << std::setprecision(4) << database->getPet(i)->GetPrice();
+        converter << std::setprecision(5) << database->getPet(i)->GetPrice();
         std::string price = converter.str();
 
         std::string type = database->getPet(i)->GetType();
@@ -125,8 +125,8 @@ void MainWindow::on_loadButton_clicked()
     }
 
     // test?
-    NonStackBasedSumVisitor nsbsv;
-    database->Accept(&nsbsv);
+    //NonStackBasedSumVisitor nsbsv;
+    //database->Accept(&nsbsv);
     //cout << nsbsv.getResult() << endl;
 
     int bundleRow = ui->bundleTable->rowCount();
@@ -159,6 +159,7 @@ void MainWindow::on_loadButton_clicked()
             NonStackBasedSumVisitor nsbsv;
             savingsDatabase->Accept(&nsbsv);
             double initialCost = nsbsv.getResult();
+            cout << initialCost << endl;
 
             //add to matrix so we can store the data in a table
             segments.push_back(to_string(initialCost));
@@ -172,7 +173,7 @@ void MainWindow::on_loadButton_clicked()
             ui->bundleTable->insertRow(bundleRow);
             ui->bundleTable->setItem(bundleRow,0,new QTableWidgetItem(QString::fromStdString(items[j][0]))); //name of bundle
             ui->bundleTable->setItem(bundleRow,1,new QTableWidgetItem(QString::fromStdString(items[j][1]))); //original price of bundle
-            double savings = (stod(items[j].back())-stod(items[j][1]))/stod(items[j].back())*100;  //Calculate savings usings values obtain from visitor pattern
+            int savings = (stod(items[j].back())-stod(items[j][1]))/stod(items[j].back())*100;  //Calculate savings usings values obtain from visitor pattern
             std::ostringstream converter;
             converter << std::setprecision(3) << savings;
             std::string strSavings = converter.str()+"%";

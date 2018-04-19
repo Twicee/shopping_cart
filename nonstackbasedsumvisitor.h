@@ -11,7 +11,7 @@ class NonStackBasedSumVisitor: public Visitor{
 private:
     NonStackBasedSumVisitor(const NonStackBasedSumVisitor& orig){};
 protected:
-    int sum;
+    double sum;
 public:
     NonStackBasedSumVisitor(){
         sum = 0;
@@ -40,8 +40,8 @@ public:
         }
     }
 
-    int getResult(){
-        int result = sum;
+    double getResult(){
+        double result = sum;
         sum = 0;
         return result;
     }
