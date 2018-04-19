@@ -2,6 +2,9 @@
 #define SHOPPINGCART_H
 
 #include <QDialog>
+#include "carttable.h"
+
+class QKeyEvent;
 
 namespace Ui {
 class ShoppingCart;
@@ -14,13 +17,15 @@ class ShoppingCart : public QDialog
 public:
     explicit ShoppingCart(QWidget *parent = 0);
     ~ShoppingCart();
+    void closeEvent(QCloseEvent*);
 
 signals:
     void isShown(bool);
+    void dialogClosed();
 
 public slots:
     void showOrHide();
-    void AddtoTable(std::vector<QString>);
+    cartTable* returnTable();
 
 private:
     Ui::ShoppingCart *ui;

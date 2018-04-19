@@ -1,13 +1,20 @@
 #include "shoppingcart.h"
 #include "ui_shoppingcart.h"
 
+#include <QKeyEvent>
+#include "deletebutton.h"
+#include <iostream>
+
 ShoppingCart::ShoppingCart(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::ShoppingCart)
 {
     ui->setupUi(this);
-    ui->cartTable->setColumnCount(2);
-    //connect(ui->deleteButton,SIGNAL(clicked()),ui->cartTable,SLOT(removeRow())); // deletes selection
+    ui->shoppingTable->setSelectionBehavior(QAbstractItemView::SelectRows);
+    ui->deleteRowButton->setMainWindow(this);
+
+    ui->shoppingTable->setColumnCount(2);
+    connect(ui->deleteRowButton,SIGNAL(clicked()),ui->deleteRowButton,SLOT(deleteRow())); // deletes selection
 
 }
 
@@ -28,15 +35,14 @@ void ShoppingCart::showOrHide(){
     }
 }
 
-void ShoppingCart::AddtoTable(std::vector<QString> itemVector){
-    int row_number = ui->cartTable->rowCount();
-    ui->cartTable->insertRow(ui->cartTable->rowCount());
-    ui->cartTable->setItem(row_number, 0,  new QTableWidgetItem(itemVector[1]));
-    if (itemVector[0] == "Pet"){
-        ui->cartTable->setItem(row_number, 1,  new QTableWidgetItem(itemVector[3]));
-    }
-    else{
-        ui->cartTable->setItem(row_number, 1,  new QTableWidgetItem(itemVector[2]));
-    }
+// workaround to emit a signal whenever window is closed
+void ShoppingCart::closeEvent(QCloseEvent *event){
+    emit dialogClosed();
+    event->accept(); // accepts the closure
 }
+
+cartTable* ShoppingCart::returnTable(){
+    return this->ui->shoppingTable;
+}
+
 

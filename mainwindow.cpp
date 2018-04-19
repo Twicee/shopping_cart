@@ -21,6 +21,7 @@
 #include "PetDatabaseSearchableByName.h"
 #include "showbutton.h"
 #include "addbutton.h"
+#include "carttable.h"
 
 #include "shoppingcart.h"
 
@@ -44,11 +45,6 @@
 // For the shopping cart/mainwindow observer pattern
 // and distributed collaboration necessary
 
-// To do:
-// Load the database and build it with builder pattern?
-// Use visitor pattern to calculate bundle prices?
-// bundles are composites (composite pattern)
-
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
@@ -56,31 +52,29 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->setupUi(this);
     ui->addCartButton->setEnabled(false);
     ui->showCartButton->setEnabled(false);
-
     ui->addCartButton->setMainWindow(this);
 
     // SetTables
     ui->mainTable->setColumnCount(4);
-    ui->mainTable->setSelectionBehavior(QAbstractItemView::SelectRows); //selects entire row when clicked
+    //selects entire row when clicked
+    ui->mainTable->setSelectionBehavior(QAbstractItemView::SelectRows);
     ui->bundleTable->setColumnCount(3);
     ui->bundleTable->setSelectionBehavior(QAbstractItemView::SelectRows);
-
-
-    // Current directory
-    //qDebug() << QDir::currentPath();
 
     // Shopping cart setup
     listener = new ShoppingCart(this); // defined in .h
 
-    // Connections
+    // Connections - distributed collaboration
     // showButton
     // ******************************doesnt work perfectly********************************8
     connect(ui->showCartButton,SIGNAL(clicked()),listener,SLOT(showOrHide())); // makes button show or hide cart depending if open
     connect(listener,SIGNAL(isShown(bool)),ui->showCartButton,SLOT(changeText(bool)));
+    connect(listener,SIGNAL(dialogClosed()),ui->showCartButton,SLOT(changeText(bool))); //here
+
 
     // addtocart
     connect(ui->addCartButton,SIGNAL(clicked()),ui->addCartButton,SLOT(AddClicked()));
-    connect(ui->addCartButton,SIGNAL(AddtoCart(std::vector<QString>)),listener,SLOT(AddtoTable(std::vector<QString>)));
+    connect(ui->addCartButton,SIGNAL(AddtoCart(std::vector<QString>)),listener->returnTable(),SLOT(AddtoTable(std::vector<QString>)));
 
 }
 
@@ -96,11 +90,6 @@ bool sortMatrix(const vector<string>& v1, const vector<string>& v2){
 MainWindow* MainWindow::returnPointer(){
     return this;
 }
-
-//std::vector<int> MainWindow::getTableInfo(){
-//    return m_tableInfo;
-//}
-
 
 void MainWindow::on_loadButton_clicked()
 {
@@ -138,7 +127,7 @@ void MainWindow::on_loadButton_clicked()
     // test?
     NonStackBasedSumVisitor nsbsv;
     database->Accept(&nsbsv);
-    cout << nsbsv.getResult() << endl;
+    //cout << nsbsv.getResult() << endl;
 
     int bundleRow = ui->bundleTable->rowCount();
     BinarySearch s;

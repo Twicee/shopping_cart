@@ -13,7 +13,7 @@
   <property name="windowTitle">
    <string>Dialog</string>
   </property>
-  <widget class="QPushButton" name="deleteButton">
+  <widget class="deleteButton" name="deleteRowButton">
    <property name="geometry">
     <rect>
      <x>30</x>
@@ -39,7 +39,7 @@
     <string>Checkout</string>
    </property>
   </widget>
-  <widget class="QTableWidget" name="cartTable">
+  <widget class="cartTable" name="shoppingTable">
    <property name="geometry">
     <rect>
      <x>50</x>
@@ -60,6 +60,18 @@
    </column>
   </widget>
  </widget>
+ <customwidgets>
+  <customwidget>
+   <class>cartTable</class>
+   <extends>QTableWidget</extends>
+   <header>carttable.h</header>
+  </customwidget>
+  <customwidget>
+   <class>deleteButton</class>
+   <extends>QPushButton</extends>
+   <header>deletebutton.h</header>
+  </customwidget>
+ </customwidgets>
  <resources/>
  <connections/>
 </ui>
