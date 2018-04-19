@@ -11,6 +11,7 @@ public:
 
 public slots:
     void changeText(bool);
+    void changeText(); //for when x is pressed
 };
 
 #endif // SHOWBUTTON_H

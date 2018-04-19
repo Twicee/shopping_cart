@@ -69,7 +69,7 @@ MainWindow::MainWindow(QWidget *parent) :
     // ******************************doesnt work perfectly********************************8
     connect(ui->showCartButton,SIGNAL(clicked()),listener,SLOT(showOrHide())); // makes button show or hide cart depending if open
     connect(listener,SIGNAL(isShown(bool)),ui->showCartButton,SLOT(changeText(bool)));
-    connect(listener,SIGNAL(dialogClosed()),ui->showCartButton,SLOT(changeText(bool))); //here
+    connect(listener,SIGNAL(dialogClosed()),ui->showCartButton,SLOT(changeText())); //here
 
 
     // addtocart

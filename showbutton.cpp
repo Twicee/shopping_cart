@@ -6,3 +6,7 @@ void showButton::changeText(bool visible){
     else
         setText("Show Cart");
 }
+
+void showButton::changeText(){
+    setText("Show Cart");
+}
