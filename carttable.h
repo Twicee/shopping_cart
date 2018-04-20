@@ -10,7 +10,7 @@ public:
     cartTable(QWidget* qw):QTableWidget(qw){};
 
 signals:
-    void changeLabel(double);
+    void changeLabel(QString);
 
 public slots:
    void checkout();

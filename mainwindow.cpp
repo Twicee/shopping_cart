@@ -126,11 +126,6 @@ void MainWindow::on_loadButton_clicked()
         ui->mainTable->setItem(row_number, 3,  new QTableWidgetItem(QString::fromStdString(type)));
     }
 
-    // test?
-    //NonStackBasedSumVisitor nsbsv;
-    //database->Accept(&nsbsv);
-    //cout << nsbsv.getResult() << endl;
-
     int bundleRow = ui->bundleTable->rowCount();
     BinarySearch s;
     //read from bundles file
@@ -161,7 +156,6 @@ void MainWindow::on_loadButton_clicked()
             NonStackBasedSumVisitor nsbsv;
             savingsDatabase->Accept(&nsbsv);
             double initialCost = nsbsv.getResult();
-            cout << initialCost << endl;
 
             //add to matrix so we can store the data in a table
             segments.push_back(to_string(initialCost));

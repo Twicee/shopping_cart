@@ -6,33 +6,10 @@
 #include "BubbleSortIncreasing.h"
 #include <QTableWidgetItem>
 #include <fstream>
+#include <sstream>
 
 void cartTable::AddtoTable(std::vector<QString> itemVector){
     int row_number = rowCount();
-
-    /*
-    PetDatabaseSortableByPrice* database = new PetDatabaseSortableByPrice();
-    // cart table
-    for (int i = 0; i < row_number; i++){
-        std::string name = item(row_number,0)->text().toStdString();
-        double price = (item(row_number,1)->text()).toDouble();
-        Dog* pet = new Dog(name, "", price, 0, "");
-        database->AddPet(pet);
-    }
-
-    // new addition
-    std::string name = itemVector[1].toStdString();
-    double price = 0;
-    if (itemVector[0] == "Pet"){
-        price = itemVector[3].toDouble();
-    }
-    else{
-        price = itemVector[2].toDouble();
-    }
-    Dog* pet = new Dog(name, "", price, 0, "");
-    database->AddPet(pet);
-    */
-
 
     insertRow(rowCount());
     setItem(row_number, 0,  new QTableWidgetItem(itemVector[1]));
@@ -75,7 +52,6 @@ void cartTable::checkout(){
     NonStackBasedSumVisitor nsbsv;
     database->Accept(&nsbsv);
     double totalprice = nsbsv.getResult();
-    cout << "---------------"  << totalprice << endl;
 
     // writing to outputfile
     ofstream outfile;
@@ -86,8 +62,13 @@ void cartTable::checkout(){
         outfile << name + "," + price + "\n";
     }
     outfile.close();
-
-    emit changeLabel(totalprice);
+    std::ostringstream priceConvert;
+    priceConvert << std::setprecision(4) << totalprice;
+    std::string finalPrice = "Total: $"+priceConvert.str();
+    QString qPrice = QString::fromStdString(finalPrice);
+    emit changeLabel(qPrice);
 
 }
+
+
 
