@@ -48,11 +48,6 @@ void cartTable::checkout(){
         setItem(new_row, 1,  new QTableWidgetItem(QString::number(database->getPet(i)->GetPrice())));
     }
 
-    // giving final price to the label
-    NonStackBasedSumVisitor nsbsv;
-    database->Accept(&nsbsv);
-    double totalprice = nsbsv.getResult();
-
     // writing to outputfile
     ofstream outfile;
     outfile.open("Checkout.csv");
@@ -62,6 +57,12 @@ void cartTable::checkout(){
         outfile << name + "," + price + "\n";
     }
     outfile.close();
+
+    // giving final price to the label
+    NonStackBasedSumVisitor nsbsv;
+    database->Accept(&nsbsv);
+    double totalprice = nsbsv.getResult();
+
     std::ostringstream priceConvert;
     priceConvert << std::setprecision(4) << totalprice;
     std::string finalPrice = "Total: $"+priceConvert.str();

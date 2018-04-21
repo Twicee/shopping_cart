@@ -16,6 +16,7 @@ ShoppingCart::ShoppingCart(QWidget *parent) :
     ui->shoppingTable->setSelectionBehavior(QAbstractItemView::SelectRows);
     ui->deleteRowButton->setMainWindow(this);
     ui->outputLabel->setStyleSheet("font-weight: bold; color: red;");
+    ui->outputLabel->setVisible(false); // makes label invisible
 
     ui->shoppingTable->setColumnCount(2);
     ui->shoppingTable->setEditTriggers(QAbstractItemView::NoEditTriggers);
@@ -23,7 +24,7 @@ ShoppingCart::ShoppingCart(QWidget *parent) :
 
     connect(ui->deleteRowButton,SIGNAL(clicked()),ui->deleteRowButton,SLOT(deleteRow())); // deletes selection
     connect(ui->checkoutPriceButton,SIGNAL(clicked()),ui->shoppingTable,SLOT(checkout())); // checkout
-    connect(ui->shoppingTable,SIGNAL(changeLabel(QString)),ui->outputLabel,SLOT(setText(QString))); // checkout
+    connect(ui->shoppingTable,SIGNAL(changeLabel(QString)),ui->outputLabel,SLOT(changeText(QString))); // checkout
 
 
 }

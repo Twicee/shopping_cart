@@ -31,7 +31,8 @@ SOURCES += \
     addbutton.cpp \
     carttable.cpp \
     deletebutton.cpp \
-    checkoutbutton.cpp
+    checkoutbutton.cpp \
+    outputlabel.cpp
 
 HEADERS += \
         mainwindow.h \
@@ -68,7 +69,8 @@ HEADERS += \
     addbutton.h \
     carttable.h \
     deletebutton.h \
-    checkoutbutton.h
+    checkoutbutton.h \
+    outputlabel.h
 
 FORMS += \
         mainwindow.ui \

@@ -59,7 +59,7 @@
     </property>
    </column>
   </widget>
-  <widget class="QLabel" name="outputLabel">
+  <widget class="outputlabel" name="outputLabel">
    <property name="geometry">
     <rect>
      <x>230</x>
@@ -88,6 +88,11 @@
    <class>checkoutButton</class>
    <extends>QPushButton</extends>
    <header>checkoutbutton.h</header>
+  </customwidget>
+  <customwidget>
+   <class>outputlabel</class>
+   <extends>QLabel</extends>
+   <header>outputlabel.h</header>
   </customwidget>
  </customwidgets>
  <resources/>
