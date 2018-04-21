@@ -64,11 +64,9 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->bundleTable->setEditTriggers(QAbstractItemView::NoEditTriggers);
 
     // Shopping cart setup
-    listener = new ShoppingCart(this); // defined in .h
+    ShoppingCart* listener = new ShoppingCart(this); // defined in .h
 
-    // Connections - distributed collaboration
-    // showButton
-    // ******************************doesnt work perfectly********************************8
+    // Connections - Observer pattern
     connect(ui->showCartButton,SIGNAL(clicked()),listener,SLOT(showOrHide())); // makes button show or hide cart depending if open
     connect(listener,SIGNAL(isShown(bool)),ui->showCartButton,SLOT(changeText(bool)));
     connect(listener,SIGNAL(dialogClosed()),ui->showCartButton,SLOT(changeText())); //here
