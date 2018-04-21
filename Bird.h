@@ -54,10 +54,6 @@ public:
         }
         return *this;
     }
-
-    virtual void Accept(Visitor *v){
-        v->VisitBird(this);
-    }
     
     bool GetNocturnality() const {
         return m_nocturn;

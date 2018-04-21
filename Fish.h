@@ -54,9 +54,7 @@ public:
         return *this;
     }
 
-    virtual void Accept(Visitor *v){
-        v->VisitFish(this);
-    }
+
     
     std::string GetEnviro() const {
         return m_enviro;

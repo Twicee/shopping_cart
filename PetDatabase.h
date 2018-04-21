@@ -57,6 +57,11 @@ public:
         return m_pets;
     }
 
+    // for adding price
+    void Accept(Visitor* v){
+        v->VisitPetDatabase(this);
+    }
+
     
 };
 

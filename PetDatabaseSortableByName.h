@@ -9,7 +9,6 @@
 #define	PETDATABASESORTABLEBYNAME_H
 
 #include "PetDatabaseSortable.h"
-#include "visitor.h"
 
 class PetDatabaseSortableByName : public PetDatabaseSortable{
 public:
@@ -30,10 +29,6 @@ public:
             return false;
     }
 
-    virtual void Accept(Visitor* v){
-        v->VisitPetDatabaseSortableByName(this);
-    }
-    
 };
 
 #endif	/* PETDATABASESORTABLEBYNAME_H */

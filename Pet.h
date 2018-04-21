@@ -65,8 +65,6 @@ public:
         return *this;
     }
 
-    virtual void Accept(Visitor*)=0;
-    
     // Getters
     std::string GetName() const{
         return m_name;
@@ -98,6 +96,13 @@ public:
     void SetPrice(double in_price){
         m_price = in_price;
     }
+
+    // for visitor
+    void Accept(Visitor *v){
+        v->VisitPet(this);
+    }
+
+    //virtual void Accept(Visitor*)=0;
     
     virtual void print() const {}
     

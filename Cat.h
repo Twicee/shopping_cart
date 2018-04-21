@@ -54,10 +54,7 @@ public:
         return *this;
     }
 
-    virtual void Accept(Visitor *v){
-        v->VisitCat(this);
-    }
-    
+
     bool GetFluffy() const {
         return m_fluffy;
     }
