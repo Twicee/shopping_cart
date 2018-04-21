@@ -37,7 +37,6 @@ void cartTable::checkout(){
     // sorting
     BubbleSortIncreasing bsi;
     bsi.sort(database);
-    database->DisplayRecords();
 
     // insertback
     int new_row = 0;
@@ -64,7 +63,7 @@ void cartTable::checkout(){
     double totalprice = nsbsv.getResult();
 
     std::ostringstream priceConvert;
-    priceConvert << std::setprecision(4) << totalprice;
+    priceConvert << std::setprecision(6) << totalprice;
     std::string finalPrice = "Total: $"+priceConvert.str();
     QString qPrice = QString::fromStdString(finalPrice);
     emit changeLabel(qPrice);

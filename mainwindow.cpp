@@ -97,13 +97,12 @@ void MainWindow::on_loadButton_clicked()
     // open pets file and read for mainTable
     string file = "Pets.csv";
 
-    // uses builder pattern and abstract factory to build a PetDatabaseSortableByName database
+    // uses builder pattern and abstract factory pattern to build a PetDatabaseSortableByName database
     DatabaseBuilder builder;
     DatabaseParser parser;
     parser.setBuilder(&builder);
     parser.parse(file);
     PetDatabaseSortableByName* database = builder.getDatabase();
-    database->DisplayRecords();
 
     // construct main table
     for (unsigned int i = 0; i < database->getSize(); i++){

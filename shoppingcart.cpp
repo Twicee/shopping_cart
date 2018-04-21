@@ -4,7 +4,7 @@
 #include <QKeyEvent>
 #include "deletebutton.h"
 #include <iostream>
-#include "checkoutbutton.h"
+//#include "checkoutbutton.h"
 #include <QPalette>
 #include <QColorDialog>
 
@@ -26,7 +26,6 @@ ShoppingCart::ShoppingCart(QWidget *parent) :
     connect(ui->deleteRowButton,SIGNAL(clicked()),ui->deleteRowButton,SLOT(deleteRow())); // deletes selection
     connect(ui->checkoutPriceButton,SIGNAL(clicked()),ui->shoppingTable,SLOT(checkout())); // checkout
     connect(ui->shoppingTable,SIGNAL(changeLabel(QString)),ui->outputLabel,SLOT(changeText(QString))); // checkout
-    //connect(ui->checkoutPriceButton,SIGNAL(clicked()),ui->shoppingTable,SLOT()
 
 }
 

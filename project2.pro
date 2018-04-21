@@ -31,7 +31,6 @@ SOURCES += \
     addbutton.cpp \
     carttable.cpp \
     deletebutton.cpp \
-    checkoutbutton.cpp \
     outputlabel.cpp
 
 HEADERS += \
