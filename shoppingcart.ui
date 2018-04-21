@@ -26,7 +26,7 @@
     <string>Delete</string>
    </property>
   </widget>
-  <widget class="checkoutButton" name="checkoutPriceButton">
+  <widget class="QPushButton" name="checkoutPriceButton">
    <property name="geometry">
     <rect>
      <x>380</x>
@@ -83,11 +83,6 @@
    <class>deleteButton</class>
    <extends>QPushButton</extends>
    <header>deletebutton.h</header>
-  </customwidget>
-  <customwidget>
-   <class>checkoutButton</class>
-   <extends>QPushButton</extends>
-   <header>checkoutbutton.h</header>
   </customwidget>
   <customwidget>
    <class>outputlabel</class>

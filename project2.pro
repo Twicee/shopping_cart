@@ -68,7 +68,6 @@ HEADERS += \
     addbutton.h \
     carttable.h \
     deletebutton.h \
-    checkoutbutton.h \
     outputlabel.h
 
 FORMS += \
