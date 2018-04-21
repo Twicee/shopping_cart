@@ -68,6 +68,8 @@ void cartTable::checkout(){
     std::string finalPrice = "Total: $"+priceConvert.str();
     QString qPrice = QString::fromStdString(finalPrice);
     emit changeLabel(qPrice);
+    parentWidget()->setEnabled(false);
+    parentWidget()->parentWidget()->setEnabled(false);
 
 }
 

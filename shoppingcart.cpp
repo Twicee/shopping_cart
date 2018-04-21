@@ -22,10 +22,11 @@ ShoppingCart::ShoppingCart(QWidget *parent) :
     ui->shoppingTable->setEditTriggers(QAbstractItemView::NoEditTriggers);
 
 
+    //distributed collaboration
     connect(ui->deleteRowButton,SIGNAL(clicked()),ui->deleteRowButton,SLOT(deleteRow())); // deletes selection
     connect(ui->checkoutPriceButton,SIGNAL(clicked()),ui->shoppingTable,SLOT(checkout())); // checkout
     connect(ui->shoppingTable,SIGNAL(changeLabel(QString)),ui->outputLabel,SLOT(changeText(QString))); // checkout
-
+    //connect(ui->checkoutPriceButton,SIGNAL(clicked()),ui->shoppingTable,SLOT()
 
 }
 

@@ -76,6 +76,7 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->addCartButton,SIGNAL(clicked()),ui->addCartButton,SLOT(AddClicked()));
     connect(ui->addCartButton,SIGNAL(AddtoCart(std::vector<QString>)),listener->returnTable(),SLOT(AddtoTable(std::vector<QString>)));
 
+
 }
 
 MainWindow::~MainWindow()
